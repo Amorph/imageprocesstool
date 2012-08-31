@@ -1,0 +1,6 @@
+Remade lua implementation of image into C userdata( for proper GC )
+1.Add samplers
+2.Add own loaders for png,exr,tga,tiff,dds,bmp,jpg
+3.Add sawers for png, dds, tga, tiff, bmp, jpg
+
+4.Add UI viewer
