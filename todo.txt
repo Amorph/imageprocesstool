@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 [+]	Remade lua implementation of image into C userdata( for proper GC )
 [*]	1.Add samplers
 		Implement all directx9 samplers filtering and address modes
@@ -10,3 +11,11 @@
 [ ]		4.2. Add GUI tool that can rerun script when script changed
 [ ] 	4.3. Integrate editor
 [ ]		4.4. Add support of C(via TCC)
+=======
+Remade lua implementation of image into C userdata( for proper GC )
+1.Add samplers
+2.Add own loaders for png,exr,tga,tiff,dds,bmp,jpg
+3.Add sawers for png, dds, tga, tiff, bmp, jpg
+
+4.Add UI viewer
+>>>>>>> d1aa12494497629389646386f42f9c8ca4644467
