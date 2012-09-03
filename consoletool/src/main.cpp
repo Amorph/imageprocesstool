@@ -24,6 +24,28 @@ void printError( lua_State* L )
 	fclose(f);
 }
 
+static int getargs (lua_State *L, char **argv, int n) {
+	int narg;
+	int i;
+	int argc = 0;
+	while (argv[argc]) argc++;  /* count total number of arguments */
+
+	narg = argc - (n + 1);  /* number of arguments to the script */
+	luaL_checkstack(L, narg + 3, "too many arguments to script");
+
+	for (i=n+1; i < argc; i++)
+		lua_pushstring(L, argv[i]);
+
+	lua_createtable(L, narg, n + 1);
+
+	for (i=0; i < argc; i++)
+	{
+		lua_pushstring(L, argv[i]);
+		lua_rawseti(L, -2, i - n);
+	}
+	return narg;
+}
+
 int _tmain(int argc, _TCHAR* argv[])
 {
 	std::cout << "Working..." << std::endl;
@@ -45,17 +67,10 @@ int _tmain(int argc, _TCHAR* argv[])
 	#include "../../builtinscripts/include/scripts.h"
 	image_lua_bind( L );
 	sampler_lua_bind( L );
-	
-	/*{//include common
-		lua_getglobal(L, "require");
-		lua_pushstring(L, "common/include");
-		res = lua_pcall( L, 1, 0, 0 );
-		if(res)
-		{
-			printError( L );
-			return 255;
-		}
-	}*/
+
+	int narg = getargs(L, argv, 1); 
+	lua_setglobal(L, "arg");
+
 
 	res = luaL_dofile( L, startScript );
 	if(res)
@@ -64,21 +79,6 @@ int _tmain(int argc, _TCHAR* argv[])
 		return 255;
 	}
 
-	lua_getglobal( L, "main" );
-	lua_pushnumber( L, argc - 2 );
-	lua_createtable( L, argc - 2, 0 );
-	for(int i = 0; i < argc - 2; i++)
-	{
-		lua_pushinteger( L, i + 1 );
-		lua_pushstring( L, argv[2+i] );
-		lua_settable( L, -3 );
-	}
-	res = lua_pcall( L, 2, 0, 0 );
-	if(res)
-	{
-		printError( L );
-		return 255;
-	}
 	lua_gc( L, LUA_GCCOLLECT, 0 );
 
 	lua_close( L );

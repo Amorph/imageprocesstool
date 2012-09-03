@@ -27,6 +27,13 @@ extern "C"
 {
 	__declspec(dllexport) int EXPORT_NAME (lua_State *L)
 	{
+		HRESULT hr = InitD3D();
+		if(FAILED(hr))
+		{
+			lua_pushstring( L, "Failed to initialize D3D");
+			lua_error( L );
+			return 0;
+		}
 		#include "../../builtinscripts/include/scripts.h"
 		image_lua_bind(L);
 		sampler_lua_bind(L);
