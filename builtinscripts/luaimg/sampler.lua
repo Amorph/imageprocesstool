@@ -36,10 +36,12 @@ sampler_state{
 };
 ]]--
 sampler_state = function( params )
-	--if data == nil then
+	assert( params ~= nil, "Wrong arguments" )
 	local data = {}
 
 	local tex, addressU, addressV, mapping, filter = params.texture, params.addressU, params.addressV, params.mapping, params.filter
+
+	assert( tex ~= nil, "Invalid texture" )
 
 	data.data = Sampler_Create( tex.data, addressU, addressV, mapping, filter )
 

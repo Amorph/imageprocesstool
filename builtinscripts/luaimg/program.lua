@@ -1,40 +1,62 @@
-ProgramsList = {
+luaimg.ProgramsList = {
 }
 
-ProgramMeta = {
+luaimg.ProgramMeta = {
 }
 
-PassMeta = {
+luaimg.PassMeta = {
 }
 
-OutputMeta = {
+luaimg.OutputMeta = {
 }
 
 
-Program = function ( name )
+luaimg.Program = function ( name )
 	local programData = {}
 
-	setmetatable( programData, ProgramMeta )
+	setmetatable( programData, luaimg.ProgramMeta )
 
 	return programData
 end
 
-Pass = function ()
+luaimg.Pass = function ()
 	local passData = {}
 
-	setmetatable( passData, PassMeta )
+	setmetatable( passData, luaimg.PassMeta )
 
 	return passData
 end
 
-Output = function ()
+luaimg.Output = function ()
 	local outputData = {}
 
-	setmetatable( outputData, OutputMeta )
+	setmetatable( outputData, luaimg.OutputMeta )
 
 	return outputData
 end
 
-RegisterProgram = function ( program )
-	table.insert( ProgramsList, program )
+luaimg.RegisterProgram = function ( program )
+	table.insert( luaimg.ProgramsList, program )
+end
+
+luaimg.Exec = function( programs )
+	local toExec = nil
+	if programs == nil then
+		toExec = luaimg.ProgramsList
+	elseif type(programs) == "string" then
+		assert(false, "TODO: implement starting of specified program")
+	elseif type(programs) == "table" then
+		assert(false, "TODO: implement starting of list programs")
+	end
+	assert( toExec ~= nil, "Can't start program(s)" )
+
+
+
+	local programId, program = nil, nil
+
+	programId, program = next( toExec, programId )
+	while( programId ~= nil ) do
+		print( "Trying to execute program:" .. program.name )
+		programId, program = next( toExec, programId )
+	end
 end

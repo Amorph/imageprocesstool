@@ -1,3 +1,4 @@
+luaimg = {}
 
 typeex = function( v )
 	local realType = type( v )

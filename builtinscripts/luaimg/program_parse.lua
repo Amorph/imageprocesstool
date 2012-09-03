@@ -39,7 +39,7 @@ local programParseMeta=
 			it, value = next( programParseData, it )
 		end
 
-		RegisterProgram( self.program )
+		luaimg.RegisterProgram( self.program )
 		return self.program
 	end,
 }
@@ -47,7 +47,7 @@ local programParseMeta=
 
 
 function pass(name)
-	local passData=Pass()
+	local passData=luaimg.Pass()
 	local passParseData={}
 
 	if typeex(name) == "string" then
@@ -66,7 +66,7 @@ end
 
 
 function output(name)
-	local outputData=Output()
+	local outputData=luaimg.Output()
 	local outputParseData={}
 
 	if typeex(name) == "string" then
@@ -87,7 +87,7 @@ end
 function program(name)
 	assert(typeex(name) == "string","Program should be named")
 
-	local programData = Program(name)
+	local programData = luaimg.Program(name)
 	local programParseData = {}
 
 	programData.name = name

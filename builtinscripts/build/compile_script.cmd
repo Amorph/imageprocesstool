@@ -6,7 +6,7 @@
 ::**************************************************************************
 cd %1%
 cd ..
-"%1\..\..\depend\luac\luac.exe" -s -o "obj/%2/%3.luac" %2/%4
+"%1\..\..\depend\luac\luac.exe" -o "obj/%2/%3.luac" %2/%4
 cd obj
 "%1\..\..\depend\luac\bin2c.exe" "%2/%3.luac" > "%2/%3.h"
 ::if not exist "scripts.h" echo /**/ > "scripts.h"

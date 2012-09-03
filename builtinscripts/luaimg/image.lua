@@ -70,6 +70,7 @@ LoadImage = function( fileName )
 	local data = {}
 
 	data.data = Image_Load( fileName )
+	assert( data.data, "Failed to load image:" .. fileName )
 
 	setmetatable( data, image_meta )
 
