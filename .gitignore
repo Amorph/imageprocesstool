@@ -10,8 +10,7 @@
 *.intermediate.manifest
 mt.dep
 
-Debug/*
-Release/*
+bin/*
 
 builtinscripts/obj/*
 builtinscripts/build/*.user
@@ -25,3 +24,6 @@ libluaimg/obj/*
 
 luaimgdll/build/*.user
 luaimgdll/obj/*
+
+consoletool/build/*.user
+consoletool/obj/*

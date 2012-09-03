@@ -11,6 +11,12 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "luaimgdll", "luaimgdll\buil
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "builtinscripts", "builtinscripts\build\builtinscripts.vcproj", "{2D1FAE0E-0FDF-4EB1-AB5E-92E8A6229D66}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "consoletool", "consoletool\build\consoletool.vcproj", "{15EC01A0-27CA-444B-BD91-A759B821C3D0}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2D1FAE0E-0FDF-4EB1-AB5E-92E8A6229D66} = {2D1FAE0E-0FDF-4EB1-AB5E-92E8A6229D66}
+		{15EC01A0-97CA-444B-AD91-A759B821C3D0} = {15EC01A0-97CA-444B-AD91-A759B821C3D0}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -29,6 +35,10 @@ Global
 		{2D1FAE0E-0FDF-4EB1-AB5E-92E8A6229D66}.Debug|Win32.Build.0 = Default|Win32
 		{2D1FAE0E-0FDF-4EB1-AB5E-92E8A6229D66}.Release|Win32.ActiveCfg = Default|Win32
 		{2D1FAE0E-0FDF-4EB1-AB5E-92E8A6229D66}.Release|Win32.Build.0 = Default|Win32
+		{15EC01A0-27CA-444B-BD91-A759B821C3D0}.Debug|Win32.ActiveCfg = Debug|Win32
+		{15EC01A0-27CA-444B-BD91-A759B821C3D0}.Debug|Win32.Build.0 = Debug|Win32
+		{15EC01A0-27CA-444B-BD91-A759B821C3D0}.Release|Win32.ActiveCfg = Release|Win32
+		{15EC01A0-27CA-444B-BD91-A759B821C3D0}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
