@@ -56,7 +56,54 @@ luaimg.Exec = function( programs )
 
 	programId, program = next( toExec, programId )
 	while( programId ~= nil ) do
-		print( "Trying to execute program:" .. program.name )
+		luaimg.ExecProgram( program )
 		programId, program = next( toExec, programId )
 	end
+end
+
+luaimg.ExecProgram = function ( program )
+	local passId, pass = nil, nil
+
+	passId, pass = next( program.passes, passId )
+	while( passId ~= nil ) do
+		luaimg.ExecPass( pass )
+		passId, pass = next( program.passes, passId )
+	end
+
+	local outputId, output = nil, nil
+
+	outputId, output = next( program.output, outputId )
+	while( outputId ~= nil ) do
+		luaimg.ExecOutput( output )
+		outputId, output = next( program.output, outputId )
+	end
+
+end
+
+luaimg.ExecPass = function ( pass )
+	local imgWidth = pass.target.width
+	local imgHeight = pass.target.height
+	local texelSizeX = 1 / pass.target.width
+	local texelSizeY = 1 / pass.target.height
+	local halfTexelSizeX = texelSizeX * 0.5
+	local halfTexelSizeY = texelSizeY * 0.5
+
+
+	for x = 0, imgWidth - 1 do
+		local texX = halfTexelSizeX + x * texelSizeX
+		for y = 0, imgHeight - 1 do
+			local texY = halfTexelSizeY + y * texelSizeY
+			local inputUV = nil
+			if pass.mapping == PIXEL then
+				inputUV = float2( x, y )
+			else
+				inputUV = float2( texX, texY )
+			end
+			setTex2D( pass.target, float2(x, y), pass.code( inputUV ) )
+		end
+	end
+end
+
+luaimg.ExecOutput = function ( output )
+	SaveImage( output.texture, output.fileName )
 end

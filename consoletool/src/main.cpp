@@ -64,9 +64,11 @@ int _tmain(int argc, _TCHAR* argv[])
 	if( argc < 2 )
 		return -1;
 
-	#include "../../builtinscripts/include/scripts.h"
 	image_lua_bind( L );
 	sampler_lua_bind( L );
+
+	#include "../../builtinscripts/include/scripts.h"
+
 
 	int narg = getargs(L, argv, 1); 
 	lua_setglobal(L, "arg");

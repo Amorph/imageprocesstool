@@ -5,7 +5,7 @@ require 'luaimg'
 
 
 --imageprocesstool.exe must work with args in same way as lua.exe
-if #arg < 2 then assert("Setup input and output textures") end
+if #arg < 2 then assert( false, "Setup input and output textures" ) end
 
 --Loading image into inputImg variable
 inputImg = LoadImage( arg[1] )
@@ -21,11 +21,11 @@ outImg = CreateImage
 --Creating texture sampler for reading input texture
 input = sampler_state
 {
-	texture = inputImg,
-	addressU = WRAP,
-	addressV = WRAP,
-	mapping = PIXEL,
-	filter = POINT,
+	texture = inputImg,--sampling texture
+	addressU = WRAP,-- x - wrapping method( wrap,clamp,mirror )
+	addressV = WRAP,-- y - wrapping method( wrap,clamp,mirror )
+	mapping = PIXEL,-- input coords type: 0..size-1 or 0..1
+	filter = POINT,--filtering mode( point, linear )
 }
 
 --This function executes for every pixel of output texture
@@ -45,7 +45,7 @@ program 'Hello world'
 		mapping = PIXEL,
 		code = copyFunction,
 	},
-	output 'SaveCopyTexture'
+	output 'SaveTexture'
 	{
 		fileName = arg[2],
 		texture = outImg,

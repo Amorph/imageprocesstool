@@ -31,10 +31,12 @@ local programParseMeta=
 		it, value = next(programParseData)
 		while( it ~= nil ) do
 			local meta = getmetatable( value )
-			if meta == PassMeta then
+			if meta == luaimg.PassMeta then
 				table.insert(self.program.passes,value)
-			elseif meta == OutputMeta then
+			elseif meta == luaimg.OutputMeta then
 				table.insert(self.program.output,value)
+			else
+				assert( false, "Unknown type in program table" )
 			end
 			it, value = next( programParseData, it )
 		end

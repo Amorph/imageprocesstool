@@ -1,0 +1,1 @@
+[ ] Check why lua-jit not working( builtin scripts not work )
