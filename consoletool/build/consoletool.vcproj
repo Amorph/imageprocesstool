@@ -64,6 +64,8 @@
 				AdditionalDependencies="lua51.lib d3d9.lib d3dx9.lib dxguid.lib"
 				OutputFile="$(OutDir)\imageprocesstool_d.exe"
 				AdditionalLibraryDirectories="../../depend\libluajit"
+				GenerateDebugInformation="true"
+				ProgramDatabaseFile="$(TargetDir)$(TargetName).pdb"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -139,6 +141,8 @@
 				AdditionalDependencies="lua51.lib d3d9.lib d3dx9.lib dxguid.lib"
 				OutputFile="$(OutDir)\imageprocesstool.exe"
 				AdditionalLibraryDirectories="../../depend\libluajit"
+				GenerateDebugInformation="true"
+				ProgramDatabaseFile="$(TargetDir)$(TargetName).pdb"
 			/>
 			<Tool
 				Name="VCALinkTool"
