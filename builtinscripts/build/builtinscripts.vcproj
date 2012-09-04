@@ -36,6 +36,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
+				Description="Checking ../include/scripts.h"
 				CommandLine="generate_header.cmd $(ProjectDir)"
 			/>
 		</Configuration>
