@@ -13,7 +13,7 @@ extern LPDIRECT3DDEVICE9   g_pd3dDevice;
 #include "image_lua.h"
 #include "sampler_lua.h"
 
-
+#include "../../builtinscripts/include/builtinscripts.h"
 
 #ifdef _DEBUG
 #	define EXPORT_NAME luaopen_luaimg_d
@@ -34,7 +34,7 @@ extern "C"
 			lua_error( L );
 			return 0;
 		}
-		#include "../../builtinscripts/include/scripts.h"
+		bind_builtin_lua_scripts( L );
 		image_lua_bind(L);
 		sampler_lua_bind(L);
 		//MessageBoxA(0,"Openned","Info",MB_OK);

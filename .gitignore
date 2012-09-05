@@ -15,7 +15,6 @@ bin/*
 builtinscripts/obj/*
 builtinscripts/build/*.user
 builtinscripts/build/Default/*
-builtinscripts/include/*
 
 libluaimg/build/*.user
 libluaimg/build/Debug/*

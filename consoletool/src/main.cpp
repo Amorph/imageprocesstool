@@ -13,6 +13,7 @@ extern LPDIRECT3DDEVICE9   g_pd3dDevice;
 #include "image_lua.h"
 #include "sampler_lua.h"
 
+#include "../../builtinscripts/include/builtinscripts.h"
 
 HRESULT InitD3D();
 
@@ -67,7 +68,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	image_lua_bind( L );
 	sampler_lua_bind( L );
 
-	#include "../../builtinscripts/include/scripts.h"
+	bind_builtin_lua_scripts( L );
 
 
 	int narg = getargs(L, argv, 1); 

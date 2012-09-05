@@ -17,27 +17,64 @@
 	<Configurations>
 		<Configuration
 			Name="Default|Win32"
-			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
-			IntermediateDirectory="$(ConfigurationName)"
-			ConfigurationType="10"
+			OutputDirectory="$(ProjectDir)\..\lib"
+			IntermediateDirectory="$(ProjectDir)\..\obj"
+			ConfigurationType="4"
 			CharacterSet="2"
-			WholeProgramOptimization="1"
+			WholeProgramOptimization="0"
+			EnableManagedIncrementalBuild="1"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
-				Description="Creating output directory"
-				CommandLine="cd $(ProjectDir)&#x0D;&#x0A;cd ..&#x0D;&#x0A;if not exist obj\luaimg md obj\luaimg&#x0D;&#x0A;"
+				CommandLine=""
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
 			/>
 			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
 				Name="VCMIDLTool"
 			/>
 			<Tool
+				Name="VCCLCompilerTool"
+				WholeProgramOptimization="false"
+				AdditionalIncludeDirectories="$(ProjectDir)../include;$(ProjectDir)../obj;"
+				MinimalRebuild="false"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLibrarianTool"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
 				Name="VCPostBuildEventTool"
-				Description="Checking ../include/scripts.h"
-				CommandLine="generate_header.cmd $(ProjectDir)"
+				Description=""
+				CommandLine=""
+				ExcludedFromBuild="false"
 			/>
 		</Configuration>
 	</Configurations>
@@ -62,7 +99,7 @@
 							Name="VCCustomBuildTool"
 							Description="$(InputFileName)"
 							CommandLine="compile_script.cmd $(ProjectDir) $(SafeParentName) $(InputName) $(InputFileName)&#x0D;&#x0A;"
-							Outputs="$(ProjectDir)../obj/$(SafeParentName)/$(InputName).luac;$(ProjectDir)../obj/$(SafeParentName)/$(InputName).h"
+							Outputs="$(ProjectDir)../obj/$(SafeParentName)/$(InputName).h"
 						/>
 					</FileConfiguration>
 				</File>
@@ -76,7 +113,7 @@
 							Name="VCCustomBuildTool"
 							Description="$(InputFileName)"
 							CommandLine="compile_script.cmd $(ProjectDir) $(SafeParentName) $(InputName) $(InputFileName)&#x0D;&#x0A;"
-							Outputs="$(ProjectDir)../obj/$(SafeParentName)/$(InputName).luac;$(ProjectDir)../obj/$(SafeParentName)/$(InputName).h"
+							Outputs="$(ProjectDir)../obj/$(SafeParentName)/$(InputName).h"
 						/>
 					</FileConfiguration>
 				</File>
@@ -90,7 +127,7 @@
 							Name="VCCustomBuildTool"
 							Description="$(InputFileName)"
 							CommandLine="compile_script.cmd $(ProjectDir) $(SafeParentName) $(InputName) $(InputFileName)&#x0D;&#x0A;"
-							Outputs="$(ProjectDir)../obj/$(SafeParentName)/$(InputName).luac;$(ProjectDir)../obj/$(SafeParentName)/$(InputName).h"
+							Outputs="$(ProjectDir)../obj/$(SafeParentName)/$(InputName).h"
 						/>
 					</FileConfiguration>
 				</File>
@@ -104,7 +141,7 @@
 							Name="VCCustomBuildTool"
 							Description="$(InputFileName)"
 							CommandLine="compile_script.cmd $(ProjectDir) $(SafeParentName) $(InputName) $(InputFileName)&#x0D;&#x0A;"
-							Outputs="$(ProjectDir)../obj/$(SafeParentName)/$(InputName).luac;$(ProjectDir)../obj/$(SafeParentName)/$(InputName).h"
+							Outputs="$(ProjectDir)../obj/$(SafeParentName)/$(InputName).h"
 						/>
 					</FileConfiguration>
 				</File>
@@ -118,7 +155,7 @@
 							Name="VCCustomBuildTool"
 							Description="$(InputFileName)"
 							CommandLine="compile_script.cmd $(ProjectDir) $(SafeParentName) $(InputName) $(InputFileName)&#x0D;&#x0A;"
-							Outputs="$(ProjectDir)../obj/$(SafeParentName)/$(InputName).luac;$(ProjectDir)../obj/$(SafeParentName)/$(InputName).h"
+							Outputs="$(ProjectDir)../obj/$(SafeParentName)/$(InputName).h"
 						/>
 					</FileConfiguration>
 				</File>
@@ -132,7 +169,7 @@
 							Name="VCCustomBuildTool"
 							Description="$(InputFileName)"
 							CommandLine="compile_script.cmd $(ProjectDir) $(SafeParentName) $(InputName) $(InputFileName)&#x0D;&#x0A;"
-							Outputs="$(ProjectDir)../obj/$(SafeParentName)/$(InputName).luac;$(ProjectDir)../obj/$(SafeParentName)/$(InputName).h"
+							Outputs="$(ProjectDir)../obj/$(SafeParentName)/$(InputName).h"
 						/>
 					</FileConfiguration>
 				</File>
@@ -146,7 +183,7 @@
 							Name="VCCustomBuildTool"
 							Description="$(InputFileName)"
 							CommandLine="compile_script.cmd $(ProjectDir) $(SafeParentName) $(InputName) $(InputFileName)&#x0D;&#x0A;"
-							Outputs="$(ProjectDir)../obj/$(SafeParentName)/$(InputName).luac;$(ProjectDir)../obj/$(SafeParentName)/$(InputName).h"
+							Outputs="$(ProjectDir)../obj/$(SafeParentName)/$(InputName).h"
 						/>
 					</FileConfiguration>
 				</File>
@@ -160,7 +197,7 @@
 							Name="VCCustomBuildTool"
 							Description="$(InputFileName)"
 							CommandLine="compile_script.cmd $(ProjectDir) $(SafeParentName) $(InputName) $(InputFileName)&#x0D;&#x0A;"
-							Outputs="$(ProjectDir)../obj/$(SafeParentName)/$(InputName).luac;$(ProjectDir)../obj/$(SafeParentName)/$(InputName).h"
+							Outputs="$(ProjectDir)../obj/$(SafeParentName)/$(InputName).h"
 						/>
 					</FileConfiguration>
 				</File>
@@ -174,11 +211,35 @@
 							Name="VCCustomBuildTool"
 							Description="$(InputFileName)"
 							CommandLine="compile_script.cmd $(ProjectDir) $(SafeParentName) $(InputName) $(InputFileName)&#x0D;&#x0A;"
-							Outputs="$(ProjectDir)../obj/$(SafeParentName)/$(InputName).luac;$(ProjectDir)../obj/$(SafeParentName)/$(InputName).h"
+							Outputs="$(ProjectDir)../obj/$(SafeParentName)/$(InputName).h"
 						/>
 					</FileConfiguration>
 				</File>
 			</Filter>
+		</Filter>
+		<Filter
+			Name="include"
+			>
+			<File
+				RelativePath="..\include\builtinscripts.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="src"
+			>
+			<File
+				RelativePath="..\src\builtinscripts.c"
+				>
+				<FileConfiguration
+					Name="Default|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						MinimalRebuild="false"
+					/>
+				</FileConfiguration>
+			</File>
 		</Filter>
 	</Files>
 	<Globals>

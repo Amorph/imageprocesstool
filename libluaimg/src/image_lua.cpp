@@ -5,6 +5,45 @@
 
 extern LPDIRECT3DDEVICE9   g_pd3dDevice;
 
+#define FOURCC_DXT1	MAKEFOURCC('D', 'X', 'T', '1')
+#define FOURCC_DXT3	MAKEFOURCC('D', 'X', 'T', '3')
+#define FOURCC_DXT5	MAKEFOURCC('D', 'X', 'T', '5')
+
+#ifdef _WIN32
+	#pragma pack(push, dds_struct, 1)
+#endif
+typedef struct DDSHEAD
+{
+	UCHAR	Signature[4];
+
+	UINT	Size1;				// size of the structure (minus MagicNum)
+	UINT	Flags1; 			// determines what fields are valid
+	UINT	Height; 			// height of surface to be created
+	UINT	Width;				// width of input surface
+	UINT	LinearSize; 		// Formless late-allocated optimized surface size
+	UINT	Depth;				// Depth if a volume texture
+	UINT	MipMapCount;		// number of mip-map levels requested
+	UINT	AlphaBitDepth;		// depth of alpha buffer requested
+
+	UINT	NotUsed[10];
+
+	UINT	Size2;				// size of structure
+	UINT	Flags2;				// pixel format flags
+	UINT	FourCC;				// (FOURCC code)
+	UINT	RGBBitCount;		// how many bits per pixel
+	UINT	RBitMask;			// mask for red bit
+	UINT	GBitMask;			// mask for green bits
+	UINT	BBitMask;			// mask for blue bits
+	UINT	RGBAlphaBitMask;	// mask for alpha channel
+
+	UINT	ddsCaps1, ddsCaps2, ddsCaps3, ddsCaps4; // direct draw surface capabilities
+	UINT	TextureStage;
+}DDSHEAD;
+#ifdef _WIN32
+	#pragma pack(pop, dds_struct)
+#endif
+
+
 #define LUAIMAGE "LuaImage"
 
 ImageData * lua_checkimage(lua_State *L, int index) 
@@ -131,14 +170,35 @@ int l_Image_Load( lua_State* L )
 	D3DXIMAGE_INFO imgInfo;
 	const char* fileName = lua_tostring( L, 1 );
 
+	bool dxtCompression = false;
+	D3DFORMAT d3dfmt = D3DFMT_UNKNOWN;
+	//check for dds format
+	{
+		if( _strcmpi( "dds", fileName + strlen( fileName ) - 3 ) == 0 )
+		{
+			DDSHEAD header;
+			FILE* f;
+			if(fopen_s( &f, fileName, "rb" ) == 0)
+			{
+				if( fread( &header, sizeof(header), 1, f ) == 1 )
+				{
+					if( strncmp( (const char*)header.Signature, "DDS ", 4 ) == 0 && ( header.FourCC == D3DFMT_DXT1 || header.FourCC == D3DFMT_DXT3 || header.FourCC == D3DFMT_DXT5 ) )
+					{
+						d3dfmt = D3DFMT_A8R8G8B8;
+					}
+				}
+				fclose(f);
+			}
+		}
+	}
+
 	LPDIRECT3DTEXTURE9 texture; 
 
-	HRESULT hr = D3DXCreateTextureFromFileEx( g_pd3dDevice, fileName, D3DX_DEFAULT_NONPOW2,  D3DX_DEFAULT_NONPOW2, 1, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_DEFAULT, D3DX_DEFAULT, 0, &imgInfo, 0, &texture );
+	HRESULT hr = D3DXCreateTextureFromFileEx( g_pd3dDevice, fileName, D3DX_DEFAULT_NONPOW2,  D3DX_DEFAULT_NONPOW2, D3DX_FROM_FILE, 0, d3dfmt, D3DPOOL_SCRATCH, D3DX_DEFAULT, D3DX_DEFAULT, 0, &imgInfo, 0, &texture );
 
 	if( FAILED( hr ) )
 	{
-		lua_pushnil( L );
-		return 1;
+		return 0;
 	}
 
 	ImageData* imgData = createImage();
