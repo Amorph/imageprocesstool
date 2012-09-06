@@ -6,7 +6,7 @@
 [ ]	3.Add sawers for png, dds, tga, tiff, bmp, jpg
 
 [ ]	4.Add UI viewer
-[ ]		4.1. Add simple console tool
+[+]		4.1. Add simple console tool
 [ ]		4.2. Add GUI tool that can rerun script when script changed
 [ ] 	4.3. Integrate editor
 [ ]		4.4. Add support of C(via TCC)

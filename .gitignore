@@ -3,6 +3,7 @@
 *.lib
 *.user
 *.obj
+*.aps
 
 *.idb
 *.pdb
@@ -17,12 +18,13 @@ builtinscripts/build/*.user
 builtinscripts/build/Default/*
 
 libluaimg/build/*.user
-libluaimg/build/Debug/*
-libluaimg/build/Release/*
 libluaimg/obj/*
 
 luaimgdll/build/*.user
 luaimgdll/obj/*
+
+guitool/build/*.user
+guitool/obj/*
 
 consoletool/build/*.user
 consoletool/obj/*

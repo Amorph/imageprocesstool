@@ -17,6 +17,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "consoletool", "consoletool\
 		{15EC01A0-97CA-444B-AD91-A759B821C3D0} = {15EC01A0-97CA-444B-AD91-A759B821C3D0}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "guitool", "guitool\build\guitool.vcproj", "{3595A9AB-A160-450D-82EB-86EFD3B216C1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -39,6 +41,10 @@ Global
 		{15EC01A0-27CA-444B-BD91-A759B821C3D0}.Debug|Win32.Build.0 = Debug|Win32
 		{15EC01A0-27CA-444B-BD91-A759B821C3D0}.Release|Win32.ActiveCfg = Release|Win32
 		{15EC01A0-27CA-444B-BD91-A759B821C3D0}.Release|Win32.Build.0 = Release|Win32
+		{3595A9AB-A160-450D-82EB-86EFD3B216C1}.Debug|Win32.ActiveCfg = Debug|Win32
+		{3595A9AB-A160-450D-82EB-86EFD3B216C1}.Debug|Win32.Build.0 = Debug|Win32
+		{3595A9AB-A160-450D-82EB-86EFD3B216C1}.Release|Win32.ActiveCfg = Release|Win32
+		{3595A9AB-A160-450D-82EB-86EFD3B216C1}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

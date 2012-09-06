@@ -2,10 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="luaimgdll"
-	ProjectGUID="{15EC01A0-97CA-444B-BD91-A759B821C3D0}"
-	RootNamespace="luaimgdll"
-	Keyword="Win32Proj"
+	Name="guitool"
+	ProjectGUID="{3595A9AB-A160-450D-82EB-86EFD3B216C1}"
+	RootNamespace="guitool"
 	TargetFrameworkVersion="196613"
 	>
 	<Platforms>
@@ -20,8 +19,9 @@
 			Name="Debug|Win32"
 			OutputDirectory="$(SolutionDir)\bin"
 			IntermediateDirectory="$(ProjectDir)\..\obj\$(ConfigurationName)"
-			ConfigurationType="2"
-			CharacterSet="0"
+			ConfigurationType="1"
+			UseOfMFC="1"
+			CharacterSet="2"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -41,30 +41,31 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../include;../../depend/libluajit;../../libluaimg/include"
-				PreprocessorDefinitions="WIN32;_DEBUG;"
+				AdditionalIncludeDirectories="$(ProjectDir)../include"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="1"
 				UsePrecompiledHeader="2"
+				PrecompiledHeaderThrough="pch.h"
 				WarningLevel="3"
-				DebugInformationFormat="3"
+				DebugInformationFormat="4"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
 			/>
 			<Tool
 				Name="VCResourceCompilerTool"
+				AdditionalIncludeDirectories="$(ProjectDir)../include"
 			/>
 			<Tool
 				Name="VCPreLinkEventTool"
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="lua51.lib d3d9.lib d3dx9.lib dxguid.lib"
-				OutputFile="$(OutDir)\luaimg_d.dll"
-				AdditionalLibraryDirectories="../../depend\libluajit"
-				IgnoreDefaultLibraryNames="LIBCMT"
+				OutputFile="$(OutDir)\ipteditor_d.exe"
+				GenerateDebugInformation="true"
+				SubSystem="2"
+				TargetMachine="1"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -92,8 +93,9 @@
 			Name="Release|Win32"
 			OutputDirectory="$(SolutionDir)\bin"
 			IntermediateDirectory="$(ProjectDir)\..\obj\$(ConfigurationName)"
-			ConfigurationType="2"
-			CharacterSet="0"
+			ConfigurationType="1"
+			UseOfMFC="1"
+			CharacterSet="2"
 			WholeProgramOptimization="1"
 			>
 			<Tool
@@ -115,31 +117,32 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				FavorSizeOrSpeed="1"
-				WholeProgramOptimization="true"
-				AdditionalIncludeDirectories="../include;../../depend/libluajit;../../libluaimg/include"
-				PreprocessorDefinitions="WIN32;NDEBUG"
+				AdditionalIncludeDirectories="$(ProjectDir)../include"
 				RuntimeLibrary="0"
 				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="2"
+				PrecompiledHeaderThrough="pch.h"
 				WarningLevel="3"
 				DebugInformationFormat="3"
-				ShowIncludes="false"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
 			/>
 			<Tool
 				Name="VCResourceCompilerTool"
+				AdditionalIncludeDirectories="$(ProjectDir)../include"
 			/>
 			<Tool
 				Name="VCPreLinkEventTool"
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="lua51.lib d3d9.lib d3dx9.lib dxguid.lib"
-				OutputFile="$(OutDir)\luaimg.dll"
-				AdditionalLibraryDirectories="../../depend\libluajit"
+				OutputFile="$(OutDir)\ipteditor.exe"
+				GenerateDebugInformation="true"
+				SubSystem="2"
+				OptimizeReferences="2"
+				EnableCOMDATFolding="2"
+				TargetMachine="1"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -173,11 +176,11 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\src\luaimgdll.cpp"
+				RelativePath="..\src\app.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\src\stdafx.cpp"
+				RelativePath="..\src\pch.cpp"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
@@ -203,11 +206,15 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath="..\include\stdafx.h"
+				RelativePath="..\include\app.h"
 				>
 			</File>
 			<File
-				RelativePath="..\include\targetver.h"
+				RelativePath="..\include\pch.h"
+				>
+			</File>
+			<File
+				RelativePath="..\res\resource.h"
 				>
 			</File>
 		</Filter>
@@ -216,6 +223,10 @@
 			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav"
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
+			<File
+				RelativePath="..\res\guitool.rc"
+				>
+			</File>
 		</Filter>
 	</Files>
 	<Globals>
