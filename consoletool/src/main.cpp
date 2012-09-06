@@ -20,9 +20,12 @@ HRESULT InitD3D();
 
 void printError( lua_State* L )
 {
-	FILE* f = fopen("error.log","a");
-	fprintf( f, "%s\n", lua_tostring( L, -1 ) );
-	fclose(f);
+	FILE* f;
+	if( fopen_s( &f, "error.log","a" ) == 0 )
+	{
+		fprintf( f, "%s\n", lua_tostring( L, -1 ) );
+		fclose(f);
+	}
 }
 
 static int getargs (lua_State *L, char **argv, int n) {
@@ -65,15 +68,20 @@ int _tmain(int argc, _TCHAR* argv[])
 	if( argc < 2 )
 		return -1;
 
+	bind_builtin_lua_scripts( L );
+
 	image_lua_bind( L );
 	sampler_lua_bind( L );
 
-	bind_builtin_lua_scripts( L );
-
+	{//write to package.loaded.luaimg that package loaded
+		lua_getglobal( L, "package" );
+		lua_getfield( L, -1, "loaded" );
+		lua_pushboolean( L, 1 );
+		lua_setfield( L, -2, "luaimg" );
+	}
 
 	int narg = getargs(L, argv, 1); 
 	lua_setglobal(L, "arg");
-
 
 	res = luaL_dofile( L, startScript );
 	if(res)

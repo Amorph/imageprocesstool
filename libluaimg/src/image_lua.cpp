@@ -254,6 +254,13 @@ int l_Image_Save( lua_State* L )
 	ImageData* imgData = lua_checkimage( L, 1 );
 	const char* fileName = lua_tostring( L, 2 );
 
+	if( !imgData || !fileName )
+	{
+		lua_pushstring( L, "Wrong parameters to Image_Save functions" );
+		lua_error( L );
+		return 0;
+	}
+
 	LPDIRECT3DTEXTURE9 texture;
 	D3DLOCKED_RECT rect;
 

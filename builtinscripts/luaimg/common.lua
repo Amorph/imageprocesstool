@@ -10,8 +10,3 @@ typeex = function( v )
 	end
 	return realType
 end
-
-
-
--- max = math.max
--- min = math.min
