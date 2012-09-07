@@ -6,11 +6,12 @@
 
 typedef struct _UniPixel
 {
+	typedef float ComponentType;
 	union {
         struct {
-            float        r,g,b,a;
+            ComponentType        r,g,b,a;
         };
-        float v[4];
+        ComponentType v[4];
     };
 }UniPixel;
 
@@ -36,6 +37,28 @@ void readR32F( void* src, UniPixel* out );
 
 void readG16R16F( void* src, UniPixel* out );
 void readG32R32F( void* src, UniPixel* out );
+
+
+void writeR8G8B8( UniPixel* src, void* out );
+void writeA8R8G8B8( UniPixel* src, void* out );
+void writeA16B16G16R16F( UniPixel* src, void* out );
+void writeA32B32G32R32F( UniPixel* src, void* out );
+
+void writeA8( UniPixel* src, void* out );
+void writeL8( UniPixel* src, void* out );
+void writeL16( UniPixel* src, void* out );
+void writeA8L8( UniPixel* src, void* out );
+
+void writeG16R16( UniPixel* src, void* out );
+void writeA16B16G16R16( UniPixel* src, void* out );
+
+void writeA2R10G10B10( UniPixel* src, void* out );
+
+void writeR16F( UniPixel* src, void* out );
+void writeR32F( UniPixel* src, void* out );
+
+void writeG16R16F( UniPixel* src, void* out );
+void writeG32R32F( UniPixel* src, void* out );
 
 
 #endif

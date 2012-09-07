@@ -5,13 +5,15 @@
 
 
 typedef void (*readImgDataFn)(void* , UniPixel*);
+typedef void (*writeImgDataFn)(UniPixel*, void*);
 
 struct ImageFormat
 {
-	const char* name;
-	int bytesPerPixel;
-	unsigned int d3dformat;
-	readImgDataFn readFn;
+	const char*		name;
+	int				bytesPerPixel;
+	unsigned int	d3dformat;
+	readImgDataFn	readFn;
+	writeImgDataFn	writeFn;
 };
 
 struct ImageData
