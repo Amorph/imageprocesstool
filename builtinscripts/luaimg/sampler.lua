@@ -1,19 +1,19 @@
 --Constants
 --Filter
-POINT = 1
-LINEAR = 2
+luaimg.POINT = 1
+luaimg.LINEAR = 2
 
 
 --AddressU,AddressV
-WRAP = 1
-MIRROR = 2
-CLAMP = 3
-BORDER = 4
-MIRRORONCE = 5
+luaimg.WRAP = 1
+luaimg.MIRROR = 2
+luaimg.CLAMP = 3
+luaimg.BORDER = 4
+luaimg.MIRRORONCE = 5
 
 --Mapping
-PIXEL = 1
-PERCENT = 2
+luaimg.PIXEL = 1
+luaimg.PERCENT = 2
 
 sampler_meta=
 {
@@ -35,7 +35,7 @@ sampler_state{
 	filter = POINT
 };
 ]]--
-sampler_state = function( params )
+luaimg.sampler_state = function( params )
 	assert( params ~= nil, "Wrong arguments" )
 	local data = {}
 
@@ -50,3 +50,4 @@ sampler_state = function( params )
 	return data
 end
 
+sampler_state = luaimg.sampler_state

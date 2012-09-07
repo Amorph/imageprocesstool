@@ -22,10 +22,10 @@ outImg = CreateImage
 input = sampler_state
 {
 	texture = inputImg,--sampling texture
-	addressU = WRAP,-- x - wrapping method( wrap,clamp,mirror )
-	addressV = WRAP,-- y - wrapping method( wrap,clamp,mirror )
-	mapping = PIXEL,-- input coords type: 0..size-1 or 0..1
-	filter = POINT,--filtering mode( point, linear )
+	addressU = luaimg.WRAP,-- x - wrapping method( wrap,clamp,mirror )
+	addressV = luaimg.WRAP,-- y - wrapping method( wrap,clamp,mirror )
+	mapping = luaimg.PIXEL,-- input coords type: 0..size-1 or 0..1
+	filter = luaimg.POINT,--filtering mode( point, linear )
 }
 
 --This function executes for every pixel of output texture
@@ -47,7 +47,7 @@ program 'Hello world'
 	},
 	output 'SaveTexture'
 	{
-		fileName = arg[2],
+		outFile = arg[2],
 		texture = outImg,
 	}
 }

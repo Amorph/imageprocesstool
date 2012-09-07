@@ -14,7 +14,7 @@ local outputParseMeta=
 {
 	__call = function( self, outParseData )
 
-		self.output.fileName= outParseData.fileName
+		self.output.outFile= outParseData.outFile
 		self.output.texture = outParseData.texture
 
 		return self.output

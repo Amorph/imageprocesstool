@@ -65,6 +65,7 @@
 				OutputFile="$(OutDir)\luaimg_d.dll"
 				AdditionalLibraryDirectories="../../depend\libluajit"
 				IgnoreDefaultLibraryNames="LIBCMT"
+				GenerateDebugInformation="true"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -140,6 +141,7 @@
 				AdditionalDependencies="lua51.lib d3d9.lib d3dx9.lib dxguid.lib"
 				OutputFile="$(OutDir)\luaimg.dll"
 				AdditionalLibraryDirectories="../../depend\libluajit"
+				GenerateDebugInformation="true"
 			/>
 			<Tool
 				Name="VCALinkTool"

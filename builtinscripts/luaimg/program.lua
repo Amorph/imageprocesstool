@@ -105,5 +105,5 @@ luaimg.ExecPass = function ( pass )
 end
 
 luaimg.ExecOutput = function ( output )
-	SaveImage( output.texture, output.fileName )
+	SaveImage( output.texture, output.outFile )
 end

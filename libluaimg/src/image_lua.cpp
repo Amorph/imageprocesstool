@@ -98,19 +98,15 @@ int l_setTex2D( lua_State* L )
 	ImageData* imgData = lua_checkimage( L, 1 );
 	unsigned char* outData = (unsigned char*)imgData->imgData;
 
-	//double u = lua_tonumber( L, 2 );
-	//double v = lua_tonumber( L, 3 );
-
-	//int x = int(u * imgData->width);
-	//int y = int(v * imgData->height);
-
+	UniPixel in;
+	
 	int x = int(lua_tonumber( L, 2 ));
 	int y = int(lua_tonumber( L, 3 ));
 
-	double r = lua_tonumber( L, 4 );
-	double g = lua_tonumber( L, 5 );
-	double b = lua_tonumber( L, 6 );
-	double a = lua_tonumber( L, 7 );
+	in.r = (UniPixel::ComponentType)lua_tonumber( L, 4 );
+	in.g = (UniPixel::ComponentType)lua_tonumber( L, 5 );
+	in.b = (UniPixel::ComponentType)lua_tonumber( L, 6 );
+	in.a = (UniPixel::ComponentType)lua_tonumber( L, 7 );
 
 	if( x >= (int)imgData->width )
 		x = (int)imgData->width - 1;
@@ -121,10 +117,12 @@ int l_setTex2D( lua_State* L )
 	if( y < 0 )
 		y = 0;
 
-	outData[ (y * imgData->width + x) * 4 + 0 ] = unsigned char(b * 255);
-	outData[ (y * imgData->width + x) * 4 + 1 ] = unsigned char(g * 255);
-	outData[ (y * imgData->width + x) * 4 + 2 ] = unsigned char(r * 255);
-	outData[ (y * imgData->width + x) * 4 + 3 ] = unsigned char(a * 255);
+	
+	void* pixelData = outData + (y * imgData->width + x) * imgData->format->bytesPerPixel;
+
+	if(imgData->format->writeFn)
+		imgData->format->writeFn(&in, pixelData);
+
 	return 0;
 }
 
@@ -253,6 +251,13 @@ int l_Image_Save( lua_State* L )
 {
 	ImageData* imgData = lua_checkimage( L, 1 );
 	const char* fileName = lua_tostring( L, 2 );
+
+	if( !imgData || !fileName )
+	{
+		lua_pushstring( L, "Wrong parameters to Image_Save functions" );
+		lua_error( L );
+		return 0;
+	}
 
 	LPDIRECT3DTEXTURE9 texture;
 	D3DLOCKED_RECT rect;
