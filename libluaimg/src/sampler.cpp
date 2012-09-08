@@ -39,6 +39,33 @@ void deleteSampler(SamplerData* img)
 	}
 }
 
+double calcAddressing( SamplerAddress address, const size_t& imgSize, const double& input )
+{
+	double tmp;
+	switch( address )
+	{
+		case SA_WRAP:
+			tmp = fmod( input, imgSize );
+			return tmp < 0 ? imgSize + tmp : tmp;
+		case SA_CLAMP:
+			if( input < 0.0 )
+				return 0.0;
+			if( input > (imgSize - 1.0) )
+				return imgSize - 1.0;
+			return input;
+		case SA_MIRROR:
+		{
+			tmp = input < 0 ? abs(input + 1) : input;
+
+			if( int((tmp) / (imgSize)) % 2 )
+				return imgSize - fmod( tmp, imgSize ) - 1;
+			return fmod( tmp, imgSize );
+		}
+	};
+	assert(!"Wrong address mode");
+	return input;
+}
+
 UniPixel tex2D( SamplerData* sampler, const double& su, const double& sv )
 {
 	UniPixel result;
@@ -61,26 +88,10 @@ UniPixel tex2D( SamplerData* sampler, const double& su, const double& sv )
 		//TODO: try add round 
 		u = floor(u/* + 0.5*/);
 		v = floor(v/* + 0.5*/);
-		switch(sampler->samplingU)
-		{
-		case SA_WRAP:
-			u = fmod( u, imgWidth );
-			u = u < 0 ? imgWidth + u : u;
-				break;
-		default:
-			assert(!"Unknown sampling state");
-			break;
-		};
-		switch(sampler->samplingV)
-		{
-		case SA_WRAP:
-			v = fmod( v, imgHeight );
-			v = v < 0 ? imgHeight + v : v;
-			break;
-		default:
-			assert(!"Unknown sampling state");
-			break;
-		};
+
+		u = calcAddressing( sampler->samplingU, imgWidth, u );
+		v = calcAddressing( sampler->samplingV, imgHeight, v );
+		
 		assert( !( v < 0.0 || u < 0.0 || u > imgWidth - 1 || v > imgHeight - 1 ) && "Wrong sampling address" );
 
 		unsigned char* srcData = (unsigned char*)sampler->samplingImage->imgData;
