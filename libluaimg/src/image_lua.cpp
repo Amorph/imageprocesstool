@@ -262,12 +262,29 @@ int l_Image_Save( lua_State* L )
 	LPDIRECT3DTEXTURE9 texture;
 	D3DLOCKED_RECT rect;
 
-	g_pd3dDevice->CreateTexture( imgData->width, imgData->height, 1, 0, (D3DFORMAT)imgData->format->d3dformat, D3DPOOL_MANAGED, &texture, 0 );
+	D3DFORMAT dxFormat = (D3DFORMAT)imgData->format->d3dformat;
+
+	if( dxFormat == D3DFMT_DXT1 || dxFormat == D3DFMT_DXT3 || dxFormat == D3DFMT_DXT5 )
+		dxFormat = D3DFMT_A8R8G8B8;
+
+	g_pd3dDevice->CreateTexture( imgData->width, imgData->height, 1, 0, dxFormat, D3DPOOL_MANAGED, &texture, 0 );
 	texture->LockRect(0, &rect, 0, 0 );
 	memcpy( rect.pBits, imgData->imgData, imgData->width * imgData->height * imgData->format->bytesPerPixel );
 	texture->UnlockRect( 0 );
 
-	D3DXSaveTextureToFile( fileName, extToFormat(fileName), texture, 0 );
+	if( imgData->format->d3dformat == D3DFMT_DXT1 || imgData->format->d3dformat == D3DFMT_DXT3 || imgData->format->d3dformat == D3DFMT_DXT5 )
+	{
+		ID3DXBuffer* dxBuffer;
+		LPDIRECT3DTEXTURE9 outTexture; 
+		D3DXSaveTextureToFileInMemory( &dxBuffer, D3DXIFF_BMP, texture, 0 );
+		D3DXCreateTextureFromFileInMemoryEx( g_pd3dDevice, dxBuffer->GetBufferPointer(), dxBuffer->GetBufferSize(), imgData->width, imgData->height, 1, 0, (D3DFORMAT)imgData->format->d3dformat, D3DPOOL_SCRATCH, D3DX_DEFAULT, D3DX_DEFAULT, 0, 0, 0, &outTexture );
+
+		D3DXSaveTextureToFile( fileName, extToFormat(fileName), outTexture, 0 );
+		outTexture->Release();
+	}else
+	{
+		D3DXSaveTextureToFile( fileName, extToFormat(fileName), texture, 0 );
+	}
 
 	texture->Release();
 

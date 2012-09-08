@@ -64,6 +64,7 @@ end
 luaimg.ExecProgram = function ( program )
 	local passId, pass = nil, nil
 
+	print("Start processing")
 	passId, pass = next( program.passes, passId )
 	while( passId ~= nil ) do
 		luaimg.ExecPass( pass )
@@ -72,6 +73,7 @@ luaimg.ExecProgram = function ( program )
 
 	local outputId, output = nil, nil
 
+	print("Start saving")
 	outputId, output = next( program.output, outputId )
 	while( outputId ~= nil ) do
 		luaimg.ExecOutput( output )
