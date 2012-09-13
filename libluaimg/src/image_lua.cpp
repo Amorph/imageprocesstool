@@ -277,7 +277,7 @@ int l_Image_Save( lua_State* L )
 		ID3DXBuffer* dxBuffer;
 		LPDIRECT3DTEXTURE9 outTexture; 
 		D3DXSaveTextureToFileInMemory( &dxBuffer, D3DXIFF_BMP, texture, 0 );
-		D3DXCreateTextureFromFileInMemoryEx( g_pd3dDevice, dxBuffer->GetBufferPointer(), dxBuffer->GetBufferSize(), imgData->width, imgData->height, 1, 0, (D3DFORMAT)imgData->format->d3dformat, D3DPOOL_SCRATCH, D3DX_DEFAULT, D3DX_DEFAULT, 0, 0, 0, &outTexture );
+		D3DXCreateTextureFromFileInMemoryEx( g_pd3dDevice, dxBuffer->GetBufferPointer(), dxBuffer->GetBufferSize(), imgData->width, imgData->height, 0, 0, (D3DFORMAT)imgData->format->d3dformat, D3DPOOL_SCRATCH, D3DX_DEFAULT, D3DX_DEFAULT, 0, 0, 0, &outTexture );
 
 		D3DXSaveTextureToFile( fileName, extToFormat(fileName), outTexture, 0 );
 		outTexture->Release();

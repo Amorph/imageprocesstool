@@ -1,7 +1,7 @@
 
 function min( x, y )
-	local typeX = type(x)
-	local typeY = type(y)
+	local typeX = typeex(x)
+	local typeY = typeex(y)
 	local mathfunc = math.min
 	if typeX ~= typeY or ( x == nil or y == nil ) then
 		assert(false, "Can't eval min for types '" .. typeX .. "' to '" .. typeY .. "'" )
@@ -18,8 +18,8 @@ function min( x, y )
 end
 
 function max( x, y )
-	local typeX = type(x)
-	local typeY = type(y)
+	local typeX = typeex(x)
+	local typeY = typeex(y)
 	local mathfunc = math.max
 	if typeX ~= typeY or ( x == nil or y == nil ) then
 		assert(false, "Can't eval max for types '" .. typeX .. "' to '" .. typeY .. "'" )
@@ -36,7 +36,7 @@ function max( x, y )
 end
 
 function abs( x )
-	local typeX = type(x)
+	local typeX = typeex(x)
 	local mathfunc = math.abs
 	if x == nil then
 		assert(false, "Can't eval abs for type '" .. typeX .. "'" )
@@ -53,7 +53,7 @@ function abs( x )
 end
 
 function acos( x )
-	local typeX = type(x)
+	local typeX = typeex(x)
 	local mathfunc = math.acos
 	if x == nil then
 		assert(false, "Can't eval acos for type '" .. typeX .. "'" )
@@ -70,7 +70,7 @@ function acos( x )
 end
 
 function asin( x )
-	local typeX = type(x)
+	local typeX = typeex(x)
 	local mathfunc = math.asin
 	if x == nil then
 		assert(false, "Can't eval asin for type '" .. typeX .. "'" )
@@ -87,7 +87,7 @@ function asin( x )
 end
 
 function atan( x )
-	local typeX = type(x)
+	local typeX = typeex(x)
 	local mathfunc = math.atan
 	if x == nil then
 		assert(false, "Can't eval atan for type '" .. typeX .. "'" )
@@ -104,7 +104,7 @@ function atan( x )
 end
 
 function cos( x )
-	local typeX = type(x)
+	local typeX = typeex(x)
 	local mathfunc = math.cos
 	if x == nil then
 		assert(false, "Can't eval cos for type '" .. typeX .. "'" )
@@ -121,7 +121,7 @@ function cos( x )
 end
 
 function sin( x )
-	local typeX = type(x)
+	local typeX = typeex(x)
 	local mathfunc = math.sin
 	if x == nil then
 		assert(false, "Can't eval sin for type '" .. typeX .. "'" )
@@ -138,7 +138,7 @@ function sin( x )
 end
 
 function tan( x )
-	local typeX = type(x)
+	local typeX = typeex(x)
 	local mathfunc = math.tan
 	if x == nil then
 		assert(false, "Can't eval tan for type '" .. typeX .. "'" )
@@ -155,7 +155,7 @@ function tan( x )
 end
 
 function ceil( x )
-	local typeX = type(x)
+	local typeX = typeex(x)
 	local mathfunc = math.ceil
 	if x == nil then
 		assert(false, "Can't eval ceil for type '" .. typeX .. "'" )
@@ -172,9 +172,9 @@ function ceil( x )
 end
 
 function clamp( x, y, z )
-	local typeX = type(x)
-	local typeY = type(y)
-	local typeZ = type(z)
+	local typeX = typeex(x)
+	local typeY = typeex(y)
+	local typeZ = typeex(z)
 	local mathfunc = function( cx, cmin, cmax ) if cx < cmin then return cmin elseif cx > cmax then return cmax else return cx end end
 	if typeX ~= typeY or  typeY ~= typeZ or ( x == nil or y == nil or z == nil) then
 		assert(false, "Can't eval clamp for x='" .. typeX .. "' min='" .. typeY .. "'" .. "' max='" .. typeZ .. "'" )
@@ -191,7 +191,7 @@ function clamp( x, y, z )
 end
 
 function saturate( x )
-	local typeX = type(x)
+	local typeX = typeex(x)
 	if typeX == "number" then
 		return clamp( x, 0, 1 )
 	elseif typeX == "float4" then
@@ -204,7 +204,7 @@ function saturate( x )
 end
 
 function floor( x )
-	local typeX = type(x)
+	local typeX = typeex(x)
 	local mathfunc = math.floor
 	if x == nil then
 		assert(false, "Can't eval floor for type '" .. typeX .. "'" )

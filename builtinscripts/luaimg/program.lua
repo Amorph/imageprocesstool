@@ -85,18 +85,17 @@ end
 luaimg.ExecPass = function ( pass )
 	local imgWidth = pass.target.width
 	local imgHeight = pass.target.height
-	local texelSizeX = 1 / pass.target.width
-	local texelSizeY = 1 / pass.target.height
+	local texelSizeX = 1.0 / imgWidth
+	local texelSizeY = 1.0 / imgHeight
 	local halfTexelSizeX = texelSizeX * 0.5
 	local halfTexelSizeY = texelSizeY * 0.5
-
 
 	for x = 0, imgWidth - 1 do
 		local texX = halfTexelSizeX + x * texelSizeX
 		for y = 0, imgHeight - 1 do
 			local texY = halfTexelSizeY + y * texelSizeY
 			local inputUV = nil
-			if pass.mapping == PIXEL then
+			if pass.mapping == luaimg.PIXEL then
 				inputUV = float2( x, y )
 			else
 				inputUV = float2( texX, texY )

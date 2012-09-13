@@ -5,6 +5,14 @@
 
 static SamplerData* images = 0;
 
+void uniPixelLerp( UniPixel* result, UniPixel* x, UniPixel* y, double coef )
+{
+	result->v[0] = x->v[0] + (y->v[0] - x->v[0]) * coef;
+	result->v[1] = x->v[1] + (y->v[1] - x->v[1]) * coef;
+	result->v[2] = x->v[2] + (y->v[2] - x->v[2]) * coef;
+	result->v[3] = x->v[3] + (y->v[3] - x->v[3]) * coef;
+}
+
 SamplerData* createSampler()
 {
 	SamplerData* img = (SamplerData*)malloc(sizeof(SamplerData));
@@ -86,11 +94,12 @@ UniPixel tex2D( SamplerData* sampler, const double& su, const double& sv )
 	if( sampler->filter == SF_POINT )
 	{
 		//TODO: try add round 
-		u = floor(u/* + 0.5*/);
-		v = floor(v/* + 0.5*/);
-
+		
 		u = calcAddressing( sampler->samplingU, imgWidth, u );
 		v = calcAddressing( sampler->samplingV, imgHeight, v );
+
+		u = floor(u + 0.5);
+		v = floor(v + 0.5);
 		
 		assert( !( v < 0.0 || u < 0.0 || u > imgWidth - 1 || v > imgHeight - 1 ) && "Wrong sampling address" );
 
@@ -100,6 +109,43 @@ UniPixel tex2D( SamplerData* sampler, const double& su, const double& sv )
 		sampler->samplingImage->format->readFn( srcData + (size_t(v) * imgWidth + size_t(u)) * sampler->samplingImage->format->bytesPerPixel, &result );
 
 		return result;
+	}else if( sampler->filter == SF_LINEAR )
+	{
+		double minU = floor(u);
+		double minV = floor(v);
+		double maxU = ceil(u);
+		double maxV = ceil(v);
+
+		double blendCoefU = u - minU;
+		double blendCoefV = v - minV;
+		
+		minU = calcAddressing( sampler->samplingU, imgWidth, minU );
+		maxU = calcAddressing( sampler->samplingU, imgWidth, maxU );
+
+		minV = calcAddressing( sampler->samplingV, imgHeight, minV );
+		maxV = calcAddressing( sampler->samplingV, imgHeight, maxV );
+		
+		unsigned char* srcData = (unsigned char*)sampler->samplingImage->imgData;
+
+		UniPixel q0;
+		UniPixel q1;
+
+		UniPixel q2;
+		UniPixel q3;
+
+		sampler->samplingImage->format->readFn( srcData + (size_t(minV) * imgWidth + size_t(minU)) * sampler->samplingImage->format->bytesPerPixel, &q0 );
+		sampler->samplingImage->format->readFn( srcData + (size_t(minV) * imgWidth + size_t(maxU)) * sampler->samplingImage->format->bytesPerPixel, &q1 );
+
+		sampler->samplingImage->format->readFn( srcData + (size_t(maxV) * imgWidth + size_t(minU)) * sampler->samplingImage->format->bytesPerPixel, &q2 );
+		sampler->samplingImage->format->readFn( srcData + (size_t(maxV) * imgWidth + size_t(maxU)) * sampler->samplingImage->format->bytesPerPixel, &q3 );
+
+		UniPixel linear0;
+		UniPixel linear1;
+		
+		uniPixelLerp( &linear0, &q0, &q1, blendCoefU );
+		uniPixelLerp( &linear1, &q2, &q3, blendCoefU );
+
+		uniPixelLerp( &result, &linear0, &linear1, blendCoefV );
 	}
 
 	return result;
