@@ -87,19 +87,19 @@ program 'Hello world'
 	pass 'horizontalBlur'
 	{
 		target = horizontalBlurImg,
-		mapping = PIXEL,
+		mapping = inputImg.PIXEL,
 		code = horizontalBlur,
 	},
 	pass 'verticalBlur'
 	{
 		target = verticalBlurImg,
-		mapping = PIXEL,
+		mapping = inputImg.PIXEL,
 		code = verticalBlur,
 	},
 	pass 'merge'
 	{
 		target = outImg,
-		mapping = PIXEL,
+		mapping = inputImg.PIXEL,
 		code = merge,
 	},
 	output 'SaveTexture'

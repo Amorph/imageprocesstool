@@ -42,7 +42,7 @@ program 'Hello world'
 	pass 'Copy'
 	{
 		target = outImg,
-		mapping = PIXEL,
+		mapping = inputImg.PIXEL,
 		code = copyFunction,
 	},
 	output 'SaveTexture'

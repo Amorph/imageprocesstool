@@ -94,12 +94,14 @@ UniPixel tex2D( SamplerData* sampler, const double& su, const double& sv )
 	if( sampler->filter == SF_POINT )
 	{
 		//TODO: try add round 
+
 		
+		u = floor(u + 0.5);
+		v = floor(v + 0.5);
+
 		u = calcAddressing( sampler->samplingU, imgWidth, u );
 		v = calcAddressing( sampler->samplingV, imgHeight, v );
 
-		u = floor(u + 0.5);
-		v = floor(v + 0.5);
 		
 		assert( !( v < 0.0 || u < 0.0 || u > imgWidth - 1 || v > imgHeight - 1 ) && "Wrong sampling address" );
 
